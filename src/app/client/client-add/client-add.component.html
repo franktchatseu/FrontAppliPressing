@@ -1,0 +1,23 @@
+
+ <div class="row">
+    <h1>Ajout de utilisateur</h1>
+</div>
+<form [formGroup]="clientform" (ngSubmit)="add()">
+
+<div class="form-group" >
+    <label for="nom">Nom</label>
+    <input type="text" class="form-control" id="nom" formControlName="nom_client">
+</div>
+<div class="form-group">
+    <label for="ville">Ville</label>
+    <input type="text" class="form-control" id="ville" formControlName="ville_client">
+</div>
+<div class="form-group">
+    <label for="tel">Telephone</label>
+    <input type="email" class="form-control" id="tel" formControlName="tel_client">
+</div>
+
+<div class="form-group">
+        <button type="submit" class="btn btn-success" [disabled]="clientform.invalid" >Add</button>
+</div>
+</form>
