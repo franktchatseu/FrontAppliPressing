@@ -50,10 +50,38 @@
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "./node_modules/bootstrap/dist/css/bootstrap.css",
               "src/styles.scss"
+              
+              
+              ,"src/assets/web/css/custom.css"
+              ,"src/assets/web/css/bootstrap.css"
+              ,"src/assets/web/css/font-awesome.css"
+              
+          
+              ,"src/assets/web/css/SidebarNav.min.css"
+              ,"src/assets/web/css/style.css"
+
+              
+              ,"src/assets/web_login/css/fontawesome-all.css"
+
+
+              
             ],
             "scripts": [
-              "./node_modules/bootstrap/dist/js/bootstrap.min.js"
+              "src/assets/web/js/jquery-1.11.1.min.js"
+             
+              ,"src/assets/web/js/classie.js"
+              
+              ,"src/assets/web/js/modernizr.custom.js"
+              ,"src/assets/web/js/metisMenu.min.js"
+              ,"src/assets/web/js/custom.js"
+              ,"src/assets/web/js/bootstrap.js"
+              
+              ,"src/assets/web/js/jquery.nicescroll.js"
+              ,"src/assets/web/js/scripts.js"
+             
 
+
+              
             ]
           },
           "configurations": {

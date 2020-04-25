@@ -32,10 +32,16 @@ import { DepotDetailComponent } from './depot/depot-detail/depot-detail.componen
 import { ClientListComponent } from './client/client-list/client-list.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ClientListDataSource } from './client/client-list/client-list-datasource';
+import { HomeComponent } from './home/home.component';
+import { SidebarComponent } from './components/templates/sidebar/sidebar.component';
+import { FooterComponent } from './components/templates/footer/footer.component';
+import { BarreoutilComponent } from './components/templates/barreoutil/barreoutil.component';
+
 
 
 const routes:Routes=[
-  {path:'',component:CategorieListComponent},
+  {path:'',component:ConnectionComponent},
+  {path:'home',component:HomeComponent},
   {path:'categorie',component:CategorieListComponent},
   {path:'client',component:ClientListComponent},
   {path:'depot',component:DepotListComponent},
@@ -65,7 +71,11 @@ const routes:Routes=[
     UserAddComponent,
     UserListComponent,
     HeaderComponent,
-    TableauComponent
+    TableauComponent,
+    HomeComponent,
+    FooterComponent,
+    SidebarComponent,
+    BarreoutilComponent
   ],
   imports: [
     BrowserModule,
