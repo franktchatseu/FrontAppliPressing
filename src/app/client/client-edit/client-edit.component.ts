@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup,Validators, FormBuilder } from '@angular/forms';
 import { Client } from 'src/app/model/client.model';
 import { ClientService } from 'src/app/service/client.service';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { ClientListComponent } from '../client-list/client-list.component';
 
 @Component({
   selector: 'app-client-edit',
@@ -13,12 +14,13 @@ export class ClientEditComponent implements OnInit {
 
   constructor(private frombuilder:FormBuilder,
               private clientservice:ClientService,
-              private dialog:MatDialog) { }
+              private dialog:MatDialogRef<ClientListComponent>,@Inject(MAT_DIALOG_DATA) public client:Client) { }
 
-  client:Client;
+  
+  //le client a mettre a jour a ete injecte dans le constructeur
   clientform:FormGroup;
   ngOnInit() {
-
+    
     this.initform();
   }
 
@@ -29,11 +31,11 @@ export class ClientEditComponent implements OnInit {
     this.clientform=this.frombuilder.group(
 
       {
-        nom_client:["",[Validators.required]],
+        nom_client:[this.client.nom_client,[Validators.required]],
 
-        ville_client:["",[Validators.required]],
+        ville_client:[this.client.ville_client,[Validators.required]],
 
-        tel_client:["",[Validators.required]],
+        tel_client:[this.client.tel_client,[Validators.required]],
       }
     )
 
@@ -42,23 +44,19 @@ export class ClientEditComponent implements OnInit {
   //la methode update
 
   update(){
-
+     
       const nom=this.clientform.value['nom_client'];
       const ville=this.clientform.value['ville_client'];
       const telephone=this.clientform.value['tel_client'];
 
-      //this.client.id_client=4;
-      const client=new Client(nom,telephone,ville);
+      //on met a jour les autres champs du client
+      this.client.nom_client=nom;
+      this.client.tel_client=telephone;
+      this.client.ville_client=ville
 
-      console.log(client);
-      this.clientservice.update_client(client).subscribe(
-
-        (data)=>{
-            this.dialog.closeAll();
-        },
-        (error)=>{
-            console.log("erruer de modification:"+error)
-        },
-      )
+      
+      this.clientservice.update_client(this.client)
+      
+      this.dialog.close();
   }
 }

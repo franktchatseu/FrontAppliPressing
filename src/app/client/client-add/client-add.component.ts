@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Client } from 'src/app/model/client.model';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatDialogRef } from '@angular/material';
 import { ClientService } from 'src/app/service/client.service';
+import { ClientListComponent } from '../client-list/client-list.component';
 
 @Component({
   selector: 'app-client-add',
@@ -14,7 +15,7 @@ export class ClientAddComponent implements OnInit {
   constructor(private frombuilder:FormBuilder,
     
     private clientservice:ClientService,
-    private dialog:MatDialog) { }
+    private dialog:MatDialogRef<ClientListComponent>) { }
 
 client:Client;
 clientform:FormGroup;
@@ -52,16 +53,12 @@ const telephone=this.clientform.value['tel_client'];
 const client=new Client(nom,telephone,ville);
 
 console.log(client);
-this.clientservice.add_client(client).subscribe(
+  this.clientservice.add_client(client);
+  this.dialog.close();
+}
 
-  (data)=>{
-    console.log(data);
-    this.dialog.closeAll();
-  },
-  (error)=>{
-    console.log("erruer d'ajout':"+error)
-  },
-  )
+closedialog(){
+  this.dialog.close();
 }
 
 }

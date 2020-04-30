@@ -26,40 +26,40 @@ export class HomeComponent implements OnInit {
     script.async = true;
     script.defer = true;
     this.body.appendChild(script);
-    console.log(script)
+    
 }
  
 public loadScript1() {
  
   let script = document.createElement('script');
-  script.innerHTML = 'jn,n,n,n';
+  script.innerHTML = '';
   script.src = '../../assets/web/js/jss.js';
   script.async = true;
   script.defer = true;
   this.body.appendChild(script);
-  console.log(script)
+ 
 } 
 public loadScript2() {
   
   let script = document.createElement('script');
-  script.innerHTML = 'jn,n,n,n';
+  script.innerHTML = '';
   script.src = '../../assets/web/js/classie.js';
   script.async = true;
   script.defer = true;
   
   this.body.appendChild(script);
-  console.log(script)
+  
   
 } 
 public loadScript3() {
 
   let script = document.createElement('script');
-  script.innerHTML = 'jn,n,n,n';
+  script.innerHTML = '';
   script.src = '../../assets/web/js/jss2.js';
   script.async = true;
   script.defer = true;
   this.body.appendChild(script);
-  console.log(script)
+  
 }
 
 

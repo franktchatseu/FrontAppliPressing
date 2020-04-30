@@ -22,7 +22,7 @@ import { TableauComponent } from './tableau/tableau.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
-import { MatFormFieldModule, MatDialogModule } from '@angular/material';
+import { MatFormFieldModule, MatDialogModule, MatSidenavModule } from '@angular/material';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { Routes, RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
@@ -87,6 +87,7 @@ const routes:Routes=[
     MatSortModule,
     MatToolbarModule,
     MatDialogModule,
+    MatSidenavModule,
     RouterModule.forRoot(routes),
     FormsModule,
     ReactiveFormsModule,

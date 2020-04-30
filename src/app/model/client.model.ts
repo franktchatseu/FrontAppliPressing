@@ -1,7 +1,7 @@
 
 export class Client{
 
-    public id_client:number;
+    public idClient:number;
     public nom_client:string;
     public tel_client:string;
     public ville_client:string;

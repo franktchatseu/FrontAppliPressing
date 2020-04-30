@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild, OnDestroy} from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource, MatTable} from '@angular/material/table';
@@ -9,6 +9,7 @@ import { ClientEditComponent } from '../client-edit/client-edit.component';
 import { MatDialog } from '@angular/material';
 import { ClientAddComponent } from '../client-add/client-add.component';
 import { ClientListDataSource, ClientItem } from './client-list-datasource';
+import { Subscription } from 'rxjs';
 
 
 export interface UserData {
@@ -36,36 +37,17 @@ const NAMES: string[] = [
   templateUrl: './client-list.component.html',
   styleUrls: ['./client-list.component.scss']
 })
-export class ClientListComponent implements OnInit {
-  displayedColumns: string[] = ['nom', 'ville', 'telephone','action'];
+export class ClientListComponent implements OnInit ,OnDestroy{
+  displayedColumns: string[] = ['id','nom', 'ville', 'telephone','action'];
  // dataSource: MatTableDataSource<UserData>;
     dataSource:ClientListDataSource;
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
-  @ViewChild(MatTable, {static: false}) table: MatTable<ClientItem>;
+  @ViewChild(MatTable, {static: false}) table: MatTable<Client>;
    client:Client;
-   list:Client[]=[
-    {
-      id_client:14,
-      nom_client:"frank",
-      ville_client:"bertoua",
-      tel_client:"44sfs"
-    },
-    {
-      id_client:14,
-      nom_client:"frank",
-      ville_client:"bertoua",
-      tel_client:"44sfs"
-    },
-    {
-      id_client:14,
-      nom_client:"frank",
-      ville_client:"bertoua",
-      tel_client:"44sfs"
-    }
-  ];
-  
-  listclient:ClientItem[];
+   
+  clientsubcription:Subscription
+  listclient:Client[];
   constructor(private clientservice:ClientService,
               private route:Router,
               private dialog:MatDialog) {
@@ -74,59 +56,68 @@ export class ClientListComponent implements OnInit {
 
    
     // Assign the data to the data source for the table to render
-    this.clientservice.list_client().subscribe(
-      (data)=>{
-        this.listclient=data._embedded.clients
-         this.client=data._embedded.clients[0];
-        console.log(this.listclient)
-        this.dataSource = new ClientListDataSource(this.listclient)
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
-        this.table.dataSource = this.dataSource;
-        
-      }
-    )
+    
+  
     
   }
 
 
 
   ngOnInit() {
-   
+    this.allclient()
     
   }
-
+  ngOnDestroy() {
+    this.clientsubcription.unsubscribe()
+    
+  }
   //autres methodes 
 
   delete(id:number){
 
-    this.clientservice.delete_client(3).subscribe(
-      (data)=>{
-        console.log(data)
-      },
-      (error)=>{
-        console.log("echec:"+error)
-      }
-    );
-    console.log(id)
+    this.clientservice.delete_client(id);
+    
   }
 
   //modication d'un client
   update(client:Client){
     
-    this.dialog.open(ClientEditComponent);
+    this.dialog.open(ClientEditComponent, {
+      width:'600px',
+      data: client,
+      disableClose: true
+  });    
   }
 
   //ajout d'un client
   add(){
     
-    this.dialog.open(ClientAddComponent);
+    this.dialog.open(ClientAddComponent,{
+      width:'600px',
+      disableClose: true
+    });
+
   }
   depot(client:Client){
     
   }
 
+  allclient(){
+    this.clientservice.list_client()
+    this.clientsubcription=this.clientservice.clientsubject.subscribe(
+        (data:Client[])=>{
+        console.log('voici mes client')
+        console.log(data)
+        this.listclient=data
+       
+        this.dataSource = new ClientListDataSource(this.listclient)
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+        this.table.dataSource = this.dataSource;
+    }
+)
 
+  }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
