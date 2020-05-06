@@ -1,5 +1,5 @@
 export class CategoriesModel {
-  public id_type:number;
+  public idType:number;
   public nom_type:string;
   public prix:number;
 
@@ -9,9 +9,3 @@ export class CategoriesModel {
   }
 }
 
-export interface CategoriesRes {
-   id_type: number;
-   nom_type: string;
-   prix: number;
-
-}

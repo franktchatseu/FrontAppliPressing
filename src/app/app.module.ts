@@ -22,7 +22,7 @@ import { TableauComponent } from './tableau/tableau.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
-import { MatFormFieldModule, MatDialogModule, MatSidenavModule } from '@angular/material';
+import { MatFormFieldModule, MatDialogModule, MatSidenavModule, MatSelectModule, MatInputModule, MatIconModule, MatGridListModule, MatDatepickerModule, MatNativeDateModule } from '@angular/material';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { Routes, RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
@@ -36,6 +36,7 @@ import { HomeComponent } from './home/home.component';
 import { SidebarComponent } from './components/templates/sidebar/sidebar.component';
 import { FooterComponent } from './components/templates/footer/footer.component';
 import { BarreoutilComponent } from './components/templates/barreoutil/barreoutil.component';
+import { SignupComponent } from './authentication/signup/signup.component';
 
 
 
@@ -44,11 +45,12 @@ const routes:Routes=[
   {path:'home',component:HomeComponent},
   {path:'categorie',component:CategorieListComponent},
   {path:'client',component:ClientListComponent},
-  {path:'depot',component:DepotListComponent},
+  {path:'depot',component:DepotAddComponent},
   {path:'retrait',component:RetraitListComponent},
   {path:'recu',component:RecuListComponent},
   {path:'connection',component:ConnectionComponent},
-  {path:'edit_client',component:ClientEditComponent}
+  {path:'edit_client',component:ClientEditComponent},
+  {path:'user',component:SignupComponent}
 ]
 
 
@@ -75,7 +77,8 @@ const routes:Routes=[
     HomeComponent,
     FooterComponent,
     SidebarComponent,
-    BarreoutilComponent
+    BarreoutilComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,
@@ -88,6 +91,13 @@ const routes:Routes=[
     MatToolbarModule,
     MatDialogModule,
     MatSidenavModule,
+    MatSelectModule,
+    MatInputModule,
+    MatIconModule,
+    MatGridListModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    
     RouterModule.forRoot(routes),
     FormsModule,
     ReactiveFormsModule,

@@ -1,11 +1,15 @@
+import { Client } from './client.model';
+
 export class FactureModel {
   public idFac:number;
-  public date_delivrance:string;
-  public date_retrait:string
+  public date_delivrance:Date;
+  public date_retrait:Date;
   public est_livrer:boolean;
   public montant_avance:number;
-  public montant_total:number
-  constructor(dateD:string,dateR:string,status:boolean,mtnAvan:number,mtnTotal:number){
+  public montant_total:number;
+  public idClient;
+
+  constructor(dateD:Date,dateR:Date,status:boolean,mtnAvan:number,mtnTotal:number){
     this.date_delivrance=dateD;
     this.date_retrait=dateR;
     this.est_livrer=status;

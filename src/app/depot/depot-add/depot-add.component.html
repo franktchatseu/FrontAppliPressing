@@ -1,1 +1,110 @@
-<p>depot-add works!</p>
+<div class="card">
+                <div class="card-header"> 
+                        <h3 style="text-align: center;">Nouvelle Reception</h3>
+        
+                        <div class="container en-tete">
+                                <div class="">
+                                        <span><h3>Nom Client: {{client.nom_client|uppercase}}</h3></span> 
+                                </div>
+                               
+                               <div class="mesdates">
+                                <h3>date de retrait:</h3>
+                                <mat-form-field>
+                                                <mat-label>Choose a date</mat-label>
+                                                <input matInput [matDatepicker]="picker" [(ngModel)]="date_retrait">
+                                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                                <mat-datepicker #picker></mat-datepicker>
+                                </mat-form-field>
+                               </div>
+                                
+                        </div>
+                </div>
+       
+        <div class="card-body">
+                      
+                <div>
+                        <mat-form-field>
+                                <mat-label>Select Categorie</mat-label>
+                                <mat-select [(ngModel)]="categorieSelected" name="categorie" (selectionChange)="getprix(categorieSelected)">
+                                        <mat-option *ngFor="let categorie of categories" [value]="categorie">
+                                                {{categorie.nom_type}}
+                                        </mat-option>
+                                </mat-select>
+                         </mat-form-field>
+                         <mat-form-field class="example-form-field">
+                                        <mat-label>Observation</mat-label>
+                                        <input matInput type="text" [(ngModel)]="observation">
+                                        
+                        </mat-form-field>
+                        <mat-form-field class="example-form-field">
+                                        <mat-label>Quantite</mat-label>
+                                        <input matInput type="number" [(ngModel)]="quantite">
+                                        
+                        </mat-form-field>
+                        <mat-form-field class="example-form-field">
+                                        <mat-label>Prix</mat-label>
+                                        <input matInput type="number"  [(ngModel)]="prix">
+                                        
+                        </mat-form-field>
+                        <button class="btn btn-info ml-2" (click)="addpannier()">Pannier</button>
+                </div>
+               
+        </div>
+</div>
+
+<div class="card">
+   
+    <div class="card-body">
+
+
+         <div class="table-responsive">
+            <table class="table  table-bordered table-hover">
+                   
+                    <thead>
+                        <tr class="success">
+                            <th >article</th>
+                            <th>Observation</th>
+                            <th>Quantite</th>
+                            <th>Prix</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let vetement of listevetement,let index=index">
+                                <td>{{vetement.categorie.nom_type}}</td>
+                                <td>{{vetement.observation}}</td>
+                                <td>{{vetement.quantite}}</td>
+                                <td>{{vetement.categorie.prix}}</td>
+                                <td>
+                                        <button class="btn btn-danger  ml-7 btn-sm" (click)="deletepannier(index)">delete</button>
+                                        <button class="btn btn-success btn-sm" style="float: right;"  >Update</button>
+                                </td>
+                        </tr>
+                       
+                        
+                    </tbody>
+
+            </table>
+        </div>   
+
+    </div>
+
+    <div class="card-footer">
+            <br>
+                        <span class="total"><h3>Montant Total:</h3><h3 style="color: darkgreen;">{{montant_total}}</h3></span>
+                         <mat-form-field class="avance">
+                                        <mat-label>Montant avance</mat-label>
+                                        <input matInput type="number" [(ngModel)]="montant_avance">
+                                        
+                        </mat-form-field>
+                        
+                        <button class="btn btn-success " style="float: right;" [disabled]="!champsvalid()" (click)="validerdepot();">Valider</button>
+
+                        <br>
+                        <button class="btn btn-danger" style="float: right;"(click)="this.dialog.close()">Close</button>
+    </div>
+    
+</div>
+
+
+

@@ -10,6 +10,7 @@ import { MatDialog } from '@angular/material';
 import { ClientAddComponent } from '../client-add/client-add.component';
 import { ClientListDataSource, ClientItem } from './client-list-datasource';
 import { Subscription } from 'rxjs';
+import { DepotAddComponent } from 'src/app/depot/depot-add/depot-add.component';
 
 
 export interface UserData {
@@ -99,7 +100,11 @@ export class ClientListComponent implements OnInit ,OnDestroy{
 
   }
   depot(client:Client){
-    
+    this.dialog.open(DepotAddComponent,{
+      width:'2000px',
+      disableClose: true,
+      data:client
+    });
   }
 
   allclient(){
